@@ -103,7 +103,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p id="subTotal">$550</p>
+                        <p id="Total">$550</p>
                     </div>
                 </div>
             </div>
@@ -126,20 +126,25 @@
         calculate()
     }
     function calculate() {
-        const ticketInput = document.getElementById("first-class");
-        const firstClass = parseInt(ticketInput.value);
+        // const ticketInput = document.getElementById("first-class");
+        // const firstClass = parseInt(ticketInput.value);
+        const firstClass = getInputvalue("first-class")
+        const secondClass = getInputvalue("second-class")
+        // const tick = document.getElementById("second-class");
+        // const secondClass = parseInt(tick.value);
 
-        const tick = document.getElementById("second-class");
-        const secondClass = parseInt(tick.value);
-
-        const total = firstClass * 150 + secondClass * 100;
-        document.getElementById("total-price").innerText="$"+total;
+        const subTotal = firstClass * 150 + secondClass * 100;
+        document.getElementById("total-price").innerText="$"+subTotal;
+        const texTotal = subTotal * 0.10;
+        document.getElementById("tax-amount").innerText = "$" +texTotal;
+        const finalTotal = subTotal + texTotal;
+        document.getElementById("Total").innerText = "$"+ finalTotal; 
     }
-    // function getInput(id){
-    //     const ticket = document.getElementById(id);
-    //     const tClass = parseInt(ticket.value);
-    //     return tClass;
-    // }
+    function getInputvalue(product){
+        const ticket = document.getElementById(product);
+        const tClass = parseInt(ticket.value);
+        return tClass;
+    }
      
             
     </script>

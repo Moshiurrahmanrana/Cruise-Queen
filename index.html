@@ -34,7 +34,7 @@
 
         <div class="booking-content">
             <h1>Cruise Queen</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+            <p>Welcome to Cruise queen.Get ready for a perception remixing, memory maxing mic drop - the new ship is all that and additional. It - s your darling onboard hits, including the ten - story test of courage, Ultimate Abyss and bipartite FlowRider foam simulators, and larger - than - life ways to stay, like the Ultimate Family Suite. Go get your ship on./p>
         </div>
 
 
@@ -64,8 +64,8 @@
                     <input id="first-class" class="inp-style inp-width" type="number" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="dal('first-class',true)" class="btn btn-default"><i class="fas fa-plus"></i></button><br>
-                    <button onclick="dal('first-class',false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                    <button onclick="shipTicket('first-class',true)" class="btn btn-default"><i class="fas fa-plus"></i></button><br>
+                    <button onclick="shipTicket('first-class',false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -75,8 +75,8 @@
                     <input id="second-class" class="inp-style inp-width" type="number" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="dal('second-class',true)" class="btn btn-default"><i class="fas fa-plus"></i></button><br>
-                    <button onclick="dal('second-class',false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                    <button onclick="shipTicket('second-class',true)" class="btn btn-default"><i class="fas fa-plus"></i></button><br>
+                    <button onclick="shipTicket('second-class',false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="calculations">
@@ -107,44 +107,47 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="bookTicket" class="btn-style">Book Now</button>
         </div>
     </main>
     <script>
-    function dal(id,hum){
+    function shipTicket(id,isIncrease){
         const ticketNumber = document.getElementById(id);
-        const ticketNew = parseInt(ticketNumber.value);
+        const ticketNew = bookingItem(id);
         let ticketNewNumber = ticketNew;
-        if (hum == true) {
+        if (isIncrease == true) {
             ticketNewNumber = ticketNew + 1;
             
         }
-        if (hum ==false && ticketNew >0) {
+        if (isIncrease ==false && ticketNew >0) {
             ticketNewNumber = ticketNew - 1;
         }
         ticketNumber.value = ticketNewNumber;
         calculate()
     }
     function calculate() {
-        // const ticketInput = document.getElementById("first-class");
-        // const firstClass = parseInt(ticketInput.value);
-        const firstClass = getInputvalue("first-class")
-        const secondClass = getInputvalue("second-class")
-        // const tick = document.getElementById("second-class");
-        // const secondClass = parseInt(tick.value);
+        const firstClass = bookingItem("first-class")
+        const secondClass = bookingItem("second-class")
+        
 
         const subTotal = firstClass * 150 + secondClass * 100;
+        const ticketQuantity = firstClass + secondClass;
         document.getElementById("total-price").innerText="$"+subTotal;
         const texTotal = subTotal * 0.10;
-        document.getElementById("tax-amount").innerText = "$" +texTotal;
+        document.getElementById("tax-amount").innerText = "$"+texTotal;
         const finalTotal = subTotal + texTotal;
         document.getElementById("Total").innerText = "$"+ finalTotal; 
+
+        document.getElementById("bookTicket").addEventListener("click",function(){
+        alert("Total Ticket: "+ticketQuantity+"  "+"Total Amount: "+finalTotal);
+    })
     }
-    function getInputvalue(product){
-        const ticket = document.getElementById(product);
-        const tClass = parseInt(ticket.value);
-        return tClass;
+    function bookingItem(id){
+        const ticketInput = document.getElementById(id);
+        const ticketCount = parseInt(ticketInput.value);
+        return ticketCount;
     }
+    
      
             
     </script>

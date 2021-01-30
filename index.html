@@ -128,27 +128,28 @@
     function calculate() {
         const firstClass = bookingItem("first-class")
         const secondClass = bookingItem("second-class")
-        
 
         const subTotal = firstClass * 150 + secondClass * 100;
-        const ticketQuantity = firstClass + secondClass;
         document.getElementById("total-price").innerText="$"+subTotal;
         const texTotal = subTotal * 0.10;
         document.getElementById("tax-amount").innerText = "$"+texTotal;
         const finalTotal = subTotal + texTotal;
         document.getElementById("Total").innerText = "$"+ finalTotal; 
 
-        document.getElementById("bookTicket").addEventListener("click",function(){
-        alert("Total Ticket: "+ticketQuantity+"  "+"Total Amount: "+finalTotal);
-    })
     }
     function bookingItem(id){
         const ticketInput = document.getElementById(id);
         const ticketCount = parseInt(ticketInput.value);
         return ticketCount;
     }
-    
-     
+    document.getElementById("bookTicket").addEventListener("click",function(){
+        const firstClass = bookingItem("first-class")
+        const secondClass = bookingItem("second-class")
+       
+        const sum = firstClass + secondClass;
+        
+        alert("Total ticket: " +sum)
+    })
             
     </script>
        
